@@ -1,5 +1,19 @@
 from django.db import models
 
+director = 'DI'
+admin = 'AD'
+lead_journalist = 'LJ'
+journalist = "JO"
+editor = 'ED'
+
+POSITIONS = [
+    (director, 'Директор'),
+    (admin, 'Администратор'),
+    (lead_journalist, 'Ведущий журналист'),
+    (journalist, 'Журналист'),
+    (editor, 'Редактор'),
+]
+
 
 # Create your models here.
 class Section(models.Model):
@@ -11,7 +25,7 @@ class Section(models.Model):
 
 class Author(models.Model):
     full_name = models.CharField(max_length=60)
-    position = models.CharField(max_length=55)
+    position = models.CharField(max_length=2, choices=POSITIONS, default=journalist)
     employment_contract = models.IntegerField()
     phone = models.CharField(max_length=13)
 
