@@ -36,10 +36,13 @@ class Author(models.Model):
     employment_contract = models.IntegerField()
     phone = models.CharField(max_length=13)
 
+    def get_last_name(self):
+        return self.full_name.split()[0]
+
 
 class Articles(models.Model):
     title = models.CharField(max_length=60)
-    price = models.FloatField(default=0.0)
+    price = models.FloatField(default=1.0)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     editing = models.BooleanField(default=False)
@@ -50,5 +53,5 @@ class Articles(models.Model):
 
 class SectionArticles(models.Model):
     amount = models.IntegerField(default=1)
-    section = models.ForeignKey(Articles, on_delete=models.CASCADE)
-    articles = models.ForeignKey(Section, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    articles = models.ForeignKey(Articles, on_delete=models.CASCADE)
